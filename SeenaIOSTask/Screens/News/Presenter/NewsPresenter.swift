@@ -33,13 +33,12 @@ class NewsPresenter : NewsPresenterProtocol ,NewsInteractorOutputProtocol{
     func newsFetchedSuccessfully(_ news: [NewsModel]) {
         view?.hideLoadingIndicator()
         self.news = news
-        view?.reloadData()
+        view?.reloadTableView()
     }
     
     func newsFetchingFailed(_ error: Error) {
         view?.hideLoadingIndicator()
-
-        //TODO: - Show Alert
+        view?.showAlertWithErrorMessage(error.localizedDescription)
         
     }
     
@@ -49,6 +48,9 @@ class NewsPresenter : NewsPresenterProtocol ,NewsInteractorOutputProtocol{
         cell.configureCell(viewModel: viewModel)
     }
     
+    func didSelectCell(at indexPath: IndexPath) {
+        router.navigateToNewsDetails(news[indexPath.row])
+    }
     
     
 }

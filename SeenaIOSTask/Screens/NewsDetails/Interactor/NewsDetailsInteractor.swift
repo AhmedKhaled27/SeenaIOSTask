@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+class NewsDetailsInteractor : NewsDetailsInputInteractorProtocol{
+   
+    var presenter: NewsDetailsOutputInteractorProtocol?
+    
+    
+}

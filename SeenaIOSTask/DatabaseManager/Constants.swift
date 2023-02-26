@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct APIConstants {
+    
+    static let APIKey = "UmdzB6AdjgMeUPAAsXG2UHKeohwabY1G"
+    static let newsUrl = "https://api.nytimes.com/svc/mostpopular/v2/emailed/7.json?api-key=\(APIConstants.APIKey)"
+    
+}

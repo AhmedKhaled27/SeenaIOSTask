@@ -21,12 +21,20 @@ class NewsTableViewController: UITableViewController ,NewsViewProtocol {
         presenter?.viewDidLoad()
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        setupNavigationController()
+    }
 
     //MARK: - Helper Functions
-    func setupTableView(){
+    private func setupTableView(){
         self.title = "News"
         self.tableView.register(UINib(nibName:newsTableViewCell , bundle: nil), forCellReuseIdentifier: newsTableViewCell)
         
+    }
+    
+    private func setupNavigationController(){
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     func showLoadingIndicator() {
@@ -37,8 +45,16 @@ class NewsTableViewController: UITableViewController ,NewsViewProtocol {
         self.hideIndicator()
     }
     
-    func reloadData() {
+    func reloadTableView() {
         self.tableView.reloadData()
+    }
+    
+    func showAlertWithErrorMessage(_ errorMessage: String) {
+        let alert = UIAlertController(title: "Senna", message: errorMessage, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel)
+        alert.addAction(okAction)
+        
+        self.present(alert, animated: true)
     }
 }
 
@@ -57,6 +73,10 @@ extension NewsTableViewController {
         presenter?.configure(cell: cell, indexPath: indexPath)
         return cell
                     
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.didSelectCell(at: indexPath)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -1,25 +1,31 @@
 //
 //  FullImageVC.swift
-//  birlasoftONE
+//  SeenaIOSTask
 //
-//  Created by Dharmendra Chaudhary on 26/02/20.
-//  Copyright © 2020 Birlasoft Ltd. All rights reserved.
+//  Created by Ahmed Khaled on 26/02/2023.
 //
+
 
 import UIKit
 import Kingfisher
 
 class FullImageVC: UIViewController , UIScrollViewDelegate {
 
+    //MARK: - IBOutLets
     @IBOutlet weak var imageView: UIImageView!
     
-    var imageUrl:String?
+    //MARK: - Properites
+    var stringImageUrl:String?
 
+    //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let url = imageUrl {
+        if let stringUrl = stringImageUrl,
+           let url = URL(string: stringUrl) {
+
             imageView.kf.setImage(with: url)
+            
         }
         
     }
